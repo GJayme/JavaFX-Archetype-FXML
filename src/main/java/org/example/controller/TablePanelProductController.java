@@ -100,6 +100,8 @@ public class TablePanelProductController {
     }
 
     public void clear(ActionEvent actionEvent) {
-        products.removeAll();
+        txtProduct.clear();
+        txtPrice.clear();
+        txtQuantity.clear();
     }
 }
