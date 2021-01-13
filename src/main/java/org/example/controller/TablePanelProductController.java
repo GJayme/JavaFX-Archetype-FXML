@@ -219,8 +219,6 @@ public class TablePanelProductController {
             txtQuantity.setText(String.valueOf(p.getQuantity()));
 
             btnSave.setText("Update");
-
-
         } catch (Exception e) {
             System.out.println("Não clicou em nada!");;
         }
