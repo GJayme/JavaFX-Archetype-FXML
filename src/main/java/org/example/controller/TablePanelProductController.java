@@ -3,16 +3,21 @@ package org.example.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import org.example.model.Product;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class TablePanelProductController {
 
@@ -38,6 +43,8 @@ public class TablePanelProductController {
     private TextField txtProduct;
     @FXML
     private TextField txtQuantity;
+    @FXML
+    private Button btnSave;
 
     private ObservableList<Product> products;
 
@@ -176,6 +183,16 @@ public class TablePanelProductController {
     }
 
     public void saveOrUpdate(ActionEvent actionEvent) {
+
+        if(btnSave.getText().equals("Update")) {
+            Product p = getProductFromView();
+            update(p);
+            clearInputFields();
+            loadTableFromDataBase();
+            btnSave.setText("Save");
+            return;
+        }
+
         save(getProductFromView());
         clearInputFields();
         loadTableFromDataBase();
@@ -189,5 +206,24 @@ public class TablePanelProductController {
             delete(code);
         }
         loadTableFromDataBase();
+    }
+
+    public Product mouseClicked(MouseEvent mouseEvent) {
+        Product p = null;
+        try {
+            p = tableView.getSelectionModel().getSelectedItem();
+
+            txtCode.setText(p.getCode());
+            txtProduct.setText(p.getName());
+            txtPrice.setText(String.valueOf(p.getPrice()));
+            txtQuantity.setText(String.valueOf(p.getQuantity()));
+
+            btnSave.setText("Update");
+
+
+        } catch (Exception e) {
+            System.out.println("Não clicou em nada!");;
+        }
+        return p;
     }
 }
