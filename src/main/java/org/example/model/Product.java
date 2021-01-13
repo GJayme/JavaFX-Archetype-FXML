@@ -1,14 +1,24 @@
 package org.example.model;
 
 public class Product {
+    private String code;
     private String name;
     private Double price;
     private Integer quantity;
 
-    public Product(String name, Double price, Integer quantity) {
+    public Product(String code, String name, Double price, Integer quantity) {
+        this.code = code;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {

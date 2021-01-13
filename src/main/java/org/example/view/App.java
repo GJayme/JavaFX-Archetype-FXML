@@ -18,7 +18,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(loadFXMLAndController("tablePanelProduct"), 575,400);
+        scene = new Scene(loadFXMLAndController("tablePanelProduct"), 630,400);
         stage.setScene(scene);
         stage.show();
     }
